@@ -30,7 +30,9 @@ class MontyHallSimulatorTest {
         montyHallSimulator.simulateGame();
 
         Collection<Invocation> invocations = Mockito.mockingDetails(simulationStatistics).getInvocations();
-        assertThat(invocations.size()).isEqualTo(2);
+        assertThat(invocations.size())
+                .as("Statistics should have been called twice, to set winner and increment gamesPlayed")
+                .isEqualTo(2);
 
         verify(simulationStatistics, times(1)).incrementGamesPlayed();
         verify(simulationStatistics, Mockito.atMostOnce()).incrementWinsWhenChangingBox();
